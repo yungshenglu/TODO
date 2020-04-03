@@ -68,6 +68,12 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex.
     README.md         package-lock.json public            tsconfig.json
     node_modules      package.json      src               tslint.json
     ```
+5. How to run the project on local machine?
+    ```bash
+    $ npm run serve
+    # You will NOT get any error meesage if compiled succeed
+    ```
+    * If compiled succeed, you can open your browser to `http://localhost:8080`
 
 ### Development 
 
