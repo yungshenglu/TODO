@@ -2,9 +2,9 @@
     <div class="todolist">
         <h2>Simple TodoList</h2>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Add a Task" aria-label="Add a Task" aria-describedby="button-addon2" v-model="newTodo" @keyup.enter="addTodo">
+            <input type="text" class="form-control" placeholder="Add a Task" aria-label="Add a Task" aria-describedby="button-addon2" v-model="newTodo" @keyup.enter="addTodo(newTodo)">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addTodo">+</button>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addTodo(newTodo)">+</button>
             </div>
         </div>
         <ul class="list-group">
@@ -25,37 +25,17 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import TodoItem from '@/models/TodoItem';
 
-/**
- * For record each todo in the todoList
- */
-class TodoItem {
-    private content: string;
-    private completed: boolean;
-    private createDate: object;
-    private completedDate: object;
-
-    constructor(content: string) {
-        this.content = content;
-        this.completed = false;
-        this.createDate = new Date();
-        this.completedDate = {};
-    }
-
-    public toggleChecked() {
-        this.completed = !this.completed;
-        this.completedDate = (this.completed) ? new Date() : {};
-    }
-}
 
 @Component
 export default class TodoList extends Vue {
     private newTodo: string = '';
     private todoList: TodoItem[] = [];
 
-    public addTodo() {
+    public addTodo(newTodo: string) {
         // Create a item for each newTodo and push into todoList
-        const todoItem = new TodoItem(this.newTodo);
+        const todoItem = new TodoItem(newTodo);
         this.todoList.push(todoItem);
         // Clear the input
         this.clearInput();
