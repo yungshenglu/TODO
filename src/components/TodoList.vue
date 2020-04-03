@@ -16,7 +16,10 @@
                 }" 
                 v-for="(item, index) in todoList" :key="index" 
                 @click="item.toggleChecked()">
-                {{ item }}
+                {{ item.content }}
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.stop="removeTodo(item)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </li>
         </ul>
     </div>
@@ -60,17 +63,29 @@ export default class TodoList extends Vue {
         this.clearInput();
     }
 
-    public removeTodo() {
-        
+    public removeTodo(item: TodoItem) {
+        this.todoList = this.todoList.filter((removedTarget) => {
+            return (removedTarget !== item);
+        });
     }
 
     public clearInput() {
         this.newTodo = '';
+    }
+
+    // TEST
+    private mounted() {
+        this.todoList.push(new TodoItem('Hello World'));
+        this.todoList.push(new TodoItem('Vue is fun!'));
     }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.list-group-item-secondary {
+    text-decoration: line-through;
+}
 
 </style>
