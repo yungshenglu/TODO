@@ -10,7 +10,12 @@
             </div>
         </div>
         <ul class="list-group">
-            <li class="list-group-item" v-for="(item, index) in todoList" :key="index" @click="item.toggleChecked()">
+            <li :class="{
+                    'list-group-item': true, 
+                    'list-group-item-secondary': item.completed
+                }" 
+                v-for="(item, index) in todoList" :key="index" 
+                @click="item.toggleChecked()">
                 {{ item }}
             </li>
         </ul>
@@ -26,14 +31,19 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 class TodoItem {
     private content: string;
     private completed: boolean;
+    private createDate: object;
+    private completedDate: object;
 
     constructor(content: string) {
         this.content = content;
         this.completed = false;
+        this.createDate = new Date();
+        this.completedDate = {};
     }
 
     public toggleChecked() {
         this.completed = !this.completed;
+        this.completedDate = (this.completed) ? new Date() : {};
     }
 }
 
