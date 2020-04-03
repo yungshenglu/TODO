@@ -9,9 +9,11 @@
                 </button>
             </div>
         </div>
-
-        {{ todoList }}
-
+        <ul>
+            <li v-for="(item, index) in todoList" :key="index">
+                {{ item.content }}
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -41,8 +43,9 @@ export default class TodoList extends Vue {
         // Log for testing
         console.log('newTodo: ', this.newTodo);
 
+        // Create a item for each newTodo and push into todoList
         let todoItem = new TodoItem(this.newTodo);
-        this.todoList.push(todoItem)
+        this.todoList.push(todoItem);
     }
 }
 </script>
