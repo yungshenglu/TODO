@@ -12,8 +12,8 @@
                     'list-group-item': true, 
                     'list-group-item-secondary': item.completed
                 }" 
-                v-for="(item, index) in todoList" :key="index" 
-                @click="item.toggleChecked()">
+                v-for="(item, index) of currTodoList" :key="index" 
+                @click="this.$store.dispatch('toggleChecked', item)">
                 {{ item.content }}
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.stop="removeTodo(item)">
                     <span aria-hidden="true">&times;</span>
@@ -25,26 +25,44 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import store from "@/store/index";
 import TodoItem from '@/models/TodoItem';
 
-
-@Component
+@Component({
+    components: {}
+})
 export default class TodoList extends Vue {
-    private newTodo: string = '';
-    private todoList: TodoItem[] = [];
+    private newTodo: string;
+    private todoList: TodoItem[];
+    private logs: string;
 
-    public addTodo(newTodo: string) {
-        // Create a item for each newTodo and push into todoList
-        const todoItem = new TodoItem(newTodo);
-        this.todoList.push(todoItem);
+    constructor() {
+        super();
+        this.newTodo = '';
+        this.todoList = [];
+        this.logs = '';
+    }
+
+    get currTodoList(): TodoList[] {
+        // Update to current TodoList
+        this.updateTodoList();
+        return this.$store.state.todoList;
+    }
+
+    public updateTodoList() {
+        this.todoList = this.$store.state.todoList;
+    }
+
+    public addTodo(newTodo: string) {        
+        // Dispatch action to addTodo
+        this.$store.dispatch('addTodo', newTodo);
         // Clear the input
         this.clearInput();
     }
 
     public removeTodo(item: TodoItem) {
-        this.todoList = this.todoList.filter((removedTarget) => {
-            return (removedTarget !== item);
-        });
+        // Dispatch action to removeTodo
+        this.$store.dispatch('removeTodo', item);
     }
 
     public clearInput() {
