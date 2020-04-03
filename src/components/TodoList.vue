@@ -9,19 +9,40 @@
                 </button>
             </div>
         </div>
+
+        {{ todoList }}
+
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+class TodoItem {
+    content: string;
+    completed: boolean;
+
+    constructor(content: string) {
+        this.content = content;
+        this.completed = false;
+    }
+
+    toggleChecket() {
+        this.completed = !this.completed;
+    }
+}
+
 @Component
 export default class TodoList extends Vue {
     newTodo: string = '';
-    
+    todoList: TodoItem[] = [];
+
     addTodo() {
         // Log for testing
         console.log('newTodo: ', this.newTodo);
+
+        let todoItem = new TodoItem(this.newTodo);
+        this.todoList.push(todoItem)
     }
 }
 </script>
