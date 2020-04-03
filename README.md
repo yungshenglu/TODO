@@ -91,9 +91,18 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
         * This version without using Vuex.
     * TODO:
         * Display the completeed date on each item
-        * Using Veux for managing for all events
-
-(To be updated.)
+        * Use Veux for managing for all events
+* **03 APR 2020** - Release Beta version (v0.2)
+    * Features:
+        * Use Veux for managing the state of all events
+        * Add [token (UUID)](https://gist.github.com/tschuegge/903b4688a70c2ea34a6270fcc7baac48) for each item
+        * Make TodoItem as a independent model
+    * TODO:
+        * Include Semantic UI to update the interface
+        * Display the completed date om each item
+        * Display all completed items
+        * Display all archieves items
+        * Display a modal for completing all items
 
 ---
 ## Contributor
