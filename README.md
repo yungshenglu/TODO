@@ -74,7 +74,14 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex.
 ---
 ## Logs
 
-(Update soon.)
+* **03 APR 2020** - Release Beta version (0.0.1)
+    * Features:
+        * User can add, remove, and check each item into list.
+        * Item can be distinguished whether it is completed or not.
+        * This version without using Vuex.
+    * TODO:
+        * Display the completeed date on each item
+        * Using Veux for managing for all events
 
 ---
 ## Contributor
