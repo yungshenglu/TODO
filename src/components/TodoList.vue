@@ -4,14 +4,14 @@
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="New TODO" aria-label="New TODO" aria-describedby="button-addon2" v-model="newTodo">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addTodo">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addTodo" @keyup.enter="addTodo">
                     Add
                 </button>
             </div>
         </div>
-        <ul>
-            <li v-for="(item, index) in todoList" :key="index">
-                {{ item.content }}
+        <ul class="list-group">
+            <li class="list-group-item" v-for="(item, index) in todoList" :key="index" @click="item.toggleChecked()">
+                {{ item }}
             </li>
         </ul>
     </div>
@@ -20,32 +20,42 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+/**
+ * For record each todo in the todoList
+ */
 class TodoItem {
-    content: string;
-    completed: boolean;
+    private content: string;
+    private completed: boolean;
 
     constructor(content: string) {
         this.content = content;
         this.completed = false;
     }
 
-    toggleChecket() {
+    public toggleChecked() {
         this.completed = !this.completed;
     }
 }
 
 @Component
 export default class TodoList extends Vue {
-    newTodo: string = '';
-    todoList: TodoItem[] = [];
+    private newTodo: string = '';
+    private todoList: TodoItem[] = [];
 
-    addTodo() {
-        // Log for testing
-        console.log('newTodo: ', this.newTodo);
-
+    public addTodo() {
         // Create a item for each newTodo and push into todoList
-        let todoItem = new TodoItem(this.newTodo);
+        const todoItem = new TodoItem(this.newTodo);
         this.todoList.push(todoItem);
+        // Clear the input
+        this.clearInput();
+    }
+
+    public removeTodo() {
+        
+    }
+
+    public clearInput() {
+        this.newTodo = '';
     }
 }
 </script>
