@@ -13,7 +13,7 @@
                     'list-group-item-secondary': item.completed
                 }" 
                 v-for="(item, index) of currTodoList" :key="index" 
-                @click="this.$store.dispatch('toggleChecked', item)">
+                @click="updateItemStatus(item)">
                 {{ item.content }}
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.stop="removeTodo(item)">
                     <span aria-hidden="true">&times;</span>
@@ -69,10 +69,15 @@ export default class TodoList extends Vue {
         this.newTodo = '';
     }
 
+    public updateItemStatus(item: TodoItem) {
+        this.$store.dispatch('toggleChecked', item.getToken);
+    }
+
     // TEST
     private mounted() {
-        this.todoList.push(new TodoItem('Hello World'));
-        this.todoList.push(new TodoItem('Vue is fun!'));
+        this.$store.state.todoList.push(new TodoItem('Hello World'));
+        this.$store.state.todoList.push(new TodoItem('Vue is fun!'));
+        
     }
 }
 </script>

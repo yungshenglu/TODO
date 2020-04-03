@@ -18,9 +18,13 @@ export default new Vuex.Store({
                 return (removedTarget !== item);
             });
         },
-        toggleChecked(context, item: TodoItem) {
-            item.toggleCompleted();
-            item.toggleCompletedDate();
+        toggleChecked(state, itemToken: string) {
+            // Get the target item with matched token
+            const targetItem = state.todoList.filter((target: TodoItem) => {
+                return (target.getToken === itemToken);
+            })[0];
+            targetItem.toggleCompleted();
+            targetItem.toggleCompletedDate();
         },
     },
     actions: {
@@ -30,8 +34,8 @@ export default new Vuex.Store({
         removeTodo(context, item: TodoItem) {
             context.commit('removeTodo', item);
         },
-        toggleChecked(context, item: TodoItem) {
-            context.commit('toggleChecked', item);
+        toggleChecked(context, itemToken: string) {
+            context.commit('toggleChecked', itemToken);
         },
     },
     modules: {
