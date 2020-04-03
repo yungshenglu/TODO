@@ -2,9 +2,9 @@
     <div class="todolist">
         <h2>Simple TodoList</h2>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Add a Task" aria-label="Add a Task" aria-describedby="button-addon2" v-model="newTodo">
+            <input type="text" class="form-control" placeholder="Add a Task" aria-label="Add a Task" aria-describedby="button-addon2" v-model="newTodo" @keyup.enter="addTodo">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addTodo" @keyup.enter="addTodo">+</button>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addTodo">+</button>
             </div>
         </div>
         <ul class="list-group">
