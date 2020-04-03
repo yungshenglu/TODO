@@ -98,6 +98,7 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
         * Add [token (UUID)](https://gist.github.com/tschuegge/903b4688a70c2ea34a6270fcc7baac48) for each item
         * Make TodoItem as a independent model
     * TODO:
+        * Enable to modify the content of existed item
         * Include Semantic UI to update the interface
         * Display the completed date om each item
         * Display all completed items
