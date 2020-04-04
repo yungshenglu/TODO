@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { types } from './types';
 import TodoItem from '@/models/TodoItem';
 

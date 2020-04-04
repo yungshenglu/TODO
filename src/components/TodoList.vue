@@ -11,21 +11,23 @@
                         }"  
                         v-for="(item, index) of todoList" :key="index">
                         <a-checkbox @change="toggleTodo(item)"></a-checkbox>
-                        
-                        <label v-if="!item.isEdit" @click="toggleEdit(item)">
+                        <label style="text-align:left; width: 87%;" v-if="!item.isEdit" @click="toggleEdit(item)">
                             {{ item.content }}
                         </label>
-                        <input type="text" v-if="item.isEdit"
+                        <a-input type="text" style="width: 87%;" allowClear v-if="item.isEdit"
+                        v-model="item.content"
                             @keyup.enter="updateTodo(item, $event.target.value)"
-                            :value="item.content" />
+                            :value="item.content">
+                        </a-input>
                         <a-icon type="close" @click.stop="removeTodo(item)" />
                     </a-list-item>
+                    <div slot="header">Header</div>
                 </a-list>
             </a-col>
 
             <a-col :xs="{ span: 20, offset: 2 }" 
                 :lg="{ span: 14, offset: 4 }">
-                <a-input-search placeholder="Add a Task" size="large" v-model="newTodo" @keyup.enter="addTodo(newTodo)" @search="addTodo(newTodo)">
+                <a-input-search placeholder="What needs to be done?" size="large" v-model="newTodo" @keyup.enter="addTodo(newTodo)" @search="addTodo(newTodo)">
                     <a-button icon="plus" type="primary"  slot="enterButton" @search="addTodo(newTodo)"></a-button>
                 </a-input-search>
             </a-col>
@@ -35,11 +37,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import store from "@/store/index";
+import store from '@/store/index';
 import TodoItem from '@/models/TodoItem';
 
 @Component({
-    components: {}
+    components: {},
 })
 export default class TodoList extends Vue {
     private newTodo: string;
@@ -51,7 +53,7 @@ export default class TodoList extends Vue {
         this.todoList = this.$store.getters.getTodoList;
     }
 
-    public addTodo(newTodo: string) {  
+    public addTodo(newTodo: string) {
         this.$store.dispatch('addTodo', newTodo);
         this.newTodo = '';
     }
@@ -63,7 +65,7 @@ export default class TodoList extends Vue {
     public updateTodo(item: TodoItem, newContent: string) {
         this.$store.dispatch('updateTodo', {
             token: item.getToken,
-            content: newContent
+            content: newContent,
         });
         this.toggleEdit(item);
     }
