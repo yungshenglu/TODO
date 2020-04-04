@@ -1,20 +1,17 @@
-/**
- * For record each todo in the todoList
- */
 export default class TodoItem {
-    protected isCompleted: boolean;
-    protected completedDate: object;
     protected token: string;
     protected content: string;
-    protected createDate: object;
+    protected createDate: Date;
+    protected completedDate: object;
+    protected isCompleted: boolean;
     protected isEdit: boolean;
 
     constructor(content: string) {
         this.token = this.generateToken();
         this.content = content;
-        this.isCompleted = false;
         this.createDate = new Date();
         this.completedDate = {};
+        this.isCompleted = false;
         this.isEdit = false;
     }
 
