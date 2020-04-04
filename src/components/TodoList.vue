@@ -1,25 +1,33 @@
 <template>
     <div class="todolist">
         <h2>Simple TodoList</h2>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Add a Task" aria-label="Add a Task" aria-describedby="button-addon2" v-model="newTodo" @keyup.enter="addTodo(newTodo)">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addTodo(newTodo)">+</button>
-            </div>
-        </div>
-        <ul class="list-group">
-            <li :class="{
-                    'list-group-item': true, 
-                    'list-group-item-secondary': item.completed
-                }" 
-                v-for="(item, index) of currTodoList" :key="index" 
-                @click="updateItemStatus(item)">
-                {{ item.content }}
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.stop="removeTodo(item)">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </li>
-        </ul>
+        <a-row>
+            <a-col :xs="{ span: 20, offset: 2 }" 
+                :lg="{ span: 14, offset: 4 }">
+                <a-input-search placeholder="Add a Task" size="large" v-model="newTodo" @keyup.enter="addTodo(newTodo)" @search="addTodo(newTodo)">
+                    <a-button icon="plus" type="primary"  slot="enterButton" @search="addTodo(newTodo)"></a-button>
+                </a-input-search>
+            </a-col>
+<br/>
+            <a-col :xs="{ span: 20, offset: 2 }" 
+                :lg="{ span: 16, offset: 4 }">
+                
+
+                <a-list bordered :dataSource="data">
+                    <a-list-item :class="{
+                            'list-group-item': true, 
+                            'list-group-item-secondary': item.isCompleted
+                        }"
+                        v-for="(item, index) of currTodoList" :key="index" 
+                        >
+                        <a-checkbox @change="updateStatus(item)">
+                            {{ item.content }}
+                        </a-checkbox>
+                        <a-icon type="close" @click.stop="removeTodo(item)" />
+                    </a-list-item>
+                </a-list>
+            </a-col>
+        </a-row>
     </div>
 </template>
 
@@ -46,6 +54,7 @@ export default class TodoList extends Vue {
     get currTodoList(): TodoList[] {
         // Update to current TodoList
         this.updateTodoList();
+        console.log(this.$store.state.todoList)
         return this.$store.state.todoList;
     }
 
@@ -65,19 +74,26 @@ export default class TodoList extends Vue {
         this.$store.dispatch('removeTodo', item);
     }
 
+    public updateTodo(item: TodoItem, newContent: string) {
+        // Dispatch action to updateTodo
+        this.$store.dispatch('updateTodo', {
+            token: item.getToken,
+            content: newContent
+        });
+    }
+
     public clearInput() {
         this.newTodo = '';
     }
 
-    public updateItemStatus(item: TodoItem) {
-        this.$store.dispatch('toggleChecked', item.getToken);
+    public updateStatus(item: TodoItem) {
+        this.$store.dispatch('updateStatus', item.getToken);
     }
 
     // TEST
     private mounted() {
         this.$store.state.todoList.push(new TodoItem('Hello World'));
         this.$store.state.todoList.push(new TodoItem('Vue is fun!'));
-        
     }
 }
 </script>
@@ -85,7 +101,7 @@ export default class TodoList extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
-.list-group-item-secondary {
+.list-group-item-secondary > label {
     text-decoration: line-through;
 }
 

@@ -2,18 +2,20 @@
  * For record each todo in the todoList
  */
 export default class TodoItem {
-    protected completed: boolean;
+    protected isCompleted: boolean;
     protected completedDate: object;
     protected token: string;
     protected content: string;
     protected createDate: object;
+    protected isEdit: boolean;
 
     constructor(content: string) {
         this.token = this.generateToken();
         this.content = content;
-        this.completed = false;
+        this.isCompleted = false;
         this.createDate = new Date();
         this.completedDate = {};
+        this.isEdit = false;
     }
 
     get getToken(): string {
@@ -24,12 +26,16 @@ export default class TodoItem {
         this.content = newContent;
     }
 
-    public toggleCompleted() {
-        this.completed = !this.completed;
+    public toggleCompletedDate() {
+        this.completedDate = (this.isCompleted) ? new Date() : {};
     }
 
-    public toggleCompletedDate() {
-        this.completedDate = (this.completed) ? new Date() : {};
+    public toggleIsCompleted() {
+        this.isCompleted = !this.isCompleted;
+    }
+
+    public toggleIsEdit() {
+        this.isEdit = !this.isEdit;
     }
 
     private generateToken(): string {

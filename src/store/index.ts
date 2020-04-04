@@ -11,20 +11,24 @@ export default new Vuex.Store({
     },
     mutations: {
         addTodo(state, newTodo: string) {
-            state.todoList.push(new TodoItem(newTodo));
+            if (newTodo !== '') {
+                state.todoList.push(new TodoItem(newTodo));
+            }
         },
         removeTodo(state, item: TodoItem) {
-            state.todoList = state.todoList.filter((removedTarget) => {
-                return (removedTarget !== item);
-            });
+            state.todoList.splice(state.todoList.indexOf(item), 1);
         },
-        toggleChecked(state, itemToken: string) {
-            // Get the target item with matched token
+        updateStatus(state, itemToken: string) {
             const targetItem = state.todoList.filter((target: TodoItem) => {
                 return (target.getToken === itemToken);
             })[0];
-            targetItem.toggleCompleted();
+            targetItem.toggleIsCompleted();
             targetItem.toggleCompletedDate();
+        },
+        updateTodo(state, payload) {
+            // Update new content
+            //targetItem.toggleEditable();
+            //targetItem.updateContent(payload.content);
         },
     },
     actions: {
@@ -34,8 +38,11 @@ export default new Vuex.Store({
         removeTodo(context, item: TodoItem) {
             context.commit('removeTodo', item);
         },
-        toggleChecked(context, itemToken: string) {
-            context.commit('toggleChecked', itemToken);
+        updateStatus(context, itemToken: string) {
+            context.commit('updateStatus', itemToken);
+        },
+        updateTodo(context, payload: object) {
+            context.commit('updateTodo', payload);
         },
     },
     modules: {
