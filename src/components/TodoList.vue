@@ -2,7 +2,7 @@
     <div class="todolist">
         <h2 id="todo-title">TODOS</h2>
         <a-row>
-            <a-col :xs="{ span: 14, offset: 5 }" :lg="{ span: 14, offset: 5 }">
+            <a-col :sm="{ span: 24, offset: 0 }" :md="{ span: 14, offset: 5 }">
                 <a-card :bordered="false">
                     <a-input-search id="todoInput" placeholder="What needs to be done?" size="large" 
                         v-model="newTodo" 
@@ -14,7 +14,7 @@
                 </a-card>
             </a-col>
 
-            <a-col :xs="{ span: 14, offset: 5 }" :lg="{ span: 14, offset: 5 }"
+            <a-col :sm="{ span: 24, offset: 0 }" :md="{ span: 14, offset: 5 }"
                 v-if="todoList.length > 0">
                 <a-card :bordered="false">
                     <a-list bordered>
@@ -40,18 +40,18 @@
                         </a-list-item>
                         <div slot="header">
                             <a-row class="todo-header">
-                                <a-col id="todo-header-progress" :xs="{ span: 12 }" :lg="{ span: 12 }">
+                                <a-col id="todo-header-progress" :xs="{ span: 10 }" :lg="{ span: 12 }">
                                     <a-progress type="circle" :width="30" :percent="donePercentage"  :showInfo="true" :format="() => ``"
                                         v-if="filterType === 'ALL'"  />
                                     <span id="todo-header-remain">
                                         {{ currRemaining() }}
                                     </span>
                                 </a-col>
-                                <a-col id='todo-header-tabs' :xs="{ span: 12 }" :lg="{ span: 12 }">
-                                    <a-radio-group buttonStyle="solid" default-value="ALL" 
+                                <a-col id='todo-header-tabs' :xs="{ span: 14 }" :lg="{ span: 12 }">
+                                    <a-radio-group buttonStyle="solid" size="small" default-value="ALL" 
                                         v-model="filterType">
                                         <a-radio-button value="ALL">ALL</a-radio-button>
-                                        <a-radio-button value="ACTIVE">ACTIVE</a-radio-button>
+                                        <a-radio-button value="ACTIVE">TODO</a-radio-button>
                                         <a-radio-button value="DONE">DONE</a-radio-button>
                                     </a-radio-group>
                                 </a-col>
@@ -161,7 +161,7 @@ export default class TodoList extends Vue {
         vertical-align: middle;
 
         #todo-header-remain {
-            font-size: 20px;
+            font-size: 15px;
             height: 28px; 
             margin-left: 5px; 
             vertical-align: middle;
@@ -196,5 +196,9 @@ export default class TodoList extends Vue {
     border-radius: 4px;
     @include card-transition;
     @include card-box-shadow;
+}
+
+.ant-card-body {
+    padding: 12px !important;
 }
 </style>
