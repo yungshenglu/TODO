@@ -147,7 +147,6 @@ export default class TodoList extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import 'src/scss/default.scss';
-import firebaseConfig from '../firebaseConfig';
 
 #todo-title {
     color: $primary-color;
