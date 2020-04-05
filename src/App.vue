@@ -1,8 +1,8 @@
 <template>
     <div id="app">
         <TodoList></TodoList>
-        <span>View on
-            <a-button type="link" style="padding: 0" href="https://github.com/yungshenglu/Vue-TodoList/">GitHub</a-button>
+        <span style="color: #BFBFBF">View on
+            <a-button type="link" style="padding: 0; color: #BFBFBF;" href="https://github.com/yungshenglu/Vue-TodoList/">GitHub</a-button>
         </span>
     </div>
 </template>
