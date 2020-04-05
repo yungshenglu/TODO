@@ -39,6 +39,7 @@ export default class TodoItem {
         this.isEdit = !this.isEdit;
     }
 
+    /* tslint:disable:no-bitwise */
     private generateToken(): string {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (char) => {
             const random = Math.random() * 16 | 0;
@@ -46,4 +47,5 @@ export default class TodoItem {
             return value.toString(16);
         });
     }
+    /* tslint:enable:no-bitwise */
 }

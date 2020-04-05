@@ -1,45 +1,55 @@
 <template>
     <div class="todolist">
-        <h2>Vue TODOS</h2>
+        <h2 id="todo-title">TODOS</h2>
         <a-row>
-            <a-col :xs="{ span: 14, offset: 5 }" 
-                :lg="{ span: 14, offset: 5 }">
+            <a-col :xs="{ span: 14, offset: 5 }" :lg="{ span: 14, offset: 5 }">
                 <a-card :bordered="false">
-                    <a-input-search id="todoInput" placeholder="What needs to be done?" size="large" v-model="newTodo" @keyup.enter="addTodo(newTodo)" @search="addTodo(newTodo)">
-                        <a-button icon="plus" type="primary"  slot="enterButton" @search="addTodo(newTodo)"></a-button>
+                    <a-input-search id="todoInput" placeholder="What needs to be done?" size="large" 
+                        v-model="newTodo" 
+                        @keyup.enter="addTodo(newTodo)" 
+                        @search="addTodo(newTodo)">
+                        <a-button icon="plus" type="primary"  slot="enterButton" 
+                            @search="addTodo(newTodo)"></a-button>
                     </a-input-search>
                 </a-card>
             </a-col>
 
-            <a-col v-if="todoList.length > 0" :xs="{ span: 14, offset: 5 }" :lg="{ span: 14, offset: 5 }">
+            <a-col :xs="{ span: 14, offset: 5 }" :lg="{ span: 14, offset: 5 }"
+                v-if="todoList.length > 0">
                 <a-card :bordered="false">
                     <a-list bordered>
                         <a-list-item :class="{
-                                'list-item': true, 
-                                'list-item-done': item.isDone
+                                'todo-item': true, 
+                                'todo-item-done': item.isDone
                             }"  
                             v-for="(item, index) of filterTodo(filterType)" :key="index">
-                            <a-checkbox :checked="item.isDone" @change="toggleTodo(item)"></a-checkbox>
-                            <label style="text-align:left; width: 87%;" v-if="!item.isEdit" @click="toggleEdit(item)">
+                            <a-checkbox :checked="item.isDone" 
+                                @change="toggleTodo(item)"></a-checkbox>
+                            <label class="todo-item-content" 
+                                v-if="!item.isEdit" 
+                                @click="toggleEdit(item)">
                                 {{ item.content }}
                             </label>
-                            <a-input type="text" style="width: 87%;" allowClear v-if="item.isEdit"
-                            v-model="item.content"
-                                @keyup.enter="updateTodo(item, $event.target.value)"
-                                :value="item.content">
+                            <a-input class="todo-item-edit" type="text" allowClear 
+                                v-if="item.isEdit" 
+                                v-model="item.content"
+                                @keyup.enter="updateTodo(item, $event.target.value)" :value="item.content">
                             </a-input>
-                            <a-icon type="close" style="color: red" @click.stop="removeTodo(item)" />
+                            <a-icon class="todo-item-close" type="close" 
+                                @click.stop="removeTodo(item)" />
                         </a-list-item>
                         <div slot="header">
-                            <a-row>
-                                <a-col style="text-align: left; vertical-align: middle" :xs="{ span: 12 }" :lg="{ span: 12 }">
-                                    <a-progress v-if="filterType === 'ALL'" type="circle" :width="30" :percent="donePercentage"  :showInfo="true" :format="() => ``" />
-                                    <span style="font-size: 20px; height: 28px; margin-left: 5px; vertical-align: middle;">
+                            <a-row class="todo-header">
+                                <a-col id="todo-header-progress" :xs="{ span: 12 }" :lg="{ span: 12 }">
+                                    <a-progress type="circle" :width="30" :percent="donePercentage"  :showInfo="true" :format="() => ``"
+                                        v-if="filterType === 'ALL'"  />
+                                    <span id="todo-header-remain">
                                         {{ currRemaining() }}
                                     </span>
                                 </a-col>
-                                <a-col style="text-align: right;" :xs="{ span: 12 }" :lg="{ span: 12 }">
-                                    <a-radio-group buttonStyle="solid" default-value="ALL" v-model="filterType">
+                                <a-col id='todo-header-tabs' :xs="{ span: 12 }" :lg="{ span: 12 }">
+                                    <a-radio-group buttonStyle="solid" default-value="ALL" 
+                                        v-model="filterType">
                                         <a-radio-button value="ALL">ALL</a-radio-button>
                                         <a-radio-button value="ACTIVE">ACTIVE</a-radio-button>
                                         <a-radio-button value="DONE">DONE</a-radio-button>
@@ -95,18 +105,26 @@ export default class TodoList extends Vue {
 
     public currRemaining(): string {
         if (this.filterType !== 'ALL') {
-            let remain = this.$store.state.todoList.filter((item: TodoItem) => (this.filterType === 'ACTIVE') ? !item.getIsDone : item.getIsDone).length;
-            let remainStatus = (this.filterType === 'ACTIVE') ? 'active' : 'done';
+            let remain: number = 0;
+            let remainStatus: string = '';
+            if (this.filterType === 'ACTIVE') {
+                remain = this.$store.state.todoList.filter((item: TodoItem) => !item.getIsDone).length;
+                remainStatus = 'active';
+            } else {
+                remain = this.$store.state.todoList.filter((item: TodoItem) => item.getIsDone).length;
+                remainStatus = 'done';
+            }
+
             if (remain > 1) {
                 return `${remain} items are ` + remainStatus;
             } else {
                 return `${remain} item is ` + remainStatus;
             }
         } else {
-            let activeItem = this.$store.state.todoList.filter((item: TodoItem) => item.getIsDone).length;
-            let totalItem = this.$store.state.todoList.length;
+            const activeItem = this.$store.state.todoList.filter((item: TodoItem) => item.getIsDone).length;
+            const totalItem = this.$store.state.todoList.length;
             this.donePercentage = (activeItem / totalItem) * 100;
-            return `${activeItem}/${totalItem}`
+            return `${activeItem}/${totalItem}`;
         }
     }
 
@@ -128,19 +146,55 @@ export default class TodoList extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.list-item-done {
-    text-decoration: line-through;
+@import 'src/scss/default.scss';
+
+#todo-title {
+    color: $primary-color;
+    font-size: 60px; 
+    font-weight: bold; 
+    margin-bottom: 0;
+}
+
+.todo-header {
+    #todo-header-progress {
+        text-align: left;
+        vertical-align: middle;
+
+        #todo-header-remain {
+            font-size: 20px;
+            height: 28px; 
+            margin-left: 5px; 
+            vertical-align: middle;
+        }
+    }
+
+    #todo-header-tabs {
+        text-align: right;
+    }
+}
+
+.todo-item {
+    &.todo-item-done {
+        text-decoration: line-through;
+    }
+
+    .todo-item-content {
+        text-align:left; 
+        width: 87%;
+    }
+
+    .todo-item-edit {
+        width: 87%;
+    }
+
+    .todo-item-close {
+        color: $close-color;
+    }
 }
 
 .ant-input-group-wrapper, .ant-list {
     border-radius: 4px;
-    transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
-    transition: -webkit-box-shadow .28s cubic-bezier(.4,0,.2,1);
-    box-shadow: 0 3px 4px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    -webkit-box-shadow: 0 3px 4px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-}
-
-.ant-card-body {
-    padding: 0 !important;
+    @include card-transition;
+    @include card-box-shadow;
 }
 </style>
