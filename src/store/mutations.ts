@@ -16,12 +16,15 @@ export const mutations = {
         })[0];
         targetItem.updateContent(payload.content);
     },
+    [types.FILTERTODO](state: any, filterType: string) {
+        state.filterType = filterType;
+    },
     [types.TOGGLETODO](state: any, itemToken: string) {
         const targetItem = state.todoList.filter((target: TodoItem) => {
             return (target.getToken === itemToken);
         })[0];
-        targetItem.toggleIsCompleted();
-        targetItem.toggleCompletedDate();
+        targetItem.toggleIsDone();
+        targetItem.toggleDoneDate();
     },
     [types.TOGGLEEDIT](state: any, itemToken: string) {
         const targetItem = state.todoList.filter((target: TodoItem) => {

@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         todoList: Array<TodoItem>(),
-        filter: 'ALL',
+        filterType: 'ALL',
     },
     mutations,
     actions,

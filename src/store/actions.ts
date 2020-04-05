@@ -10,6 +10,9 @@ export const actions = {
     updateTodo({ commit }: any, payload: any) {
         commit(types.UPDATETODO, payload);
     },
+    filterTodo({ commit }: any, filterType: string) {
+        commit(types.FILTERTODO, filterType);
+    },
     toggleTodo({ commit }: any, itemToken: string) {
         commit(types.TOGGLETODO, itemToken);
     },

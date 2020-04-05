@@ -1,10 +1,10 @@
 
 export const getters = {
     getTodoList(state: any) {
-        function getCurrTodoList(isCompleted: boolean) {
+        function getCurrTodoList(isDone: boolean) {
             const currTodoList = [];
             for (const index in state.todoList) {
-                if (state.todoList[index].isCompleted === isCompleted) {
+                if (state.todoList[index].isDone === isDone) {
                     currTodoList.push(state.todoList[index]);
                 }
             }
@@ -15,8 +15,24 @@ export const getters = {
                 return state.todoList;
             case 'DONE':
                 return getCurrTodoList(true);
-            case 'TODO':
+            case 'ACTIVE':
                 return getCurrTodoList(false);
         }
+    },
+    getFilterType(state: any) {
+        return state.filterType;
+    },
+    getAllCount(state: any) {
+        return Object.keys(state.todoList).length;
+    },
+    getDoneCount(state: any) {
+        return Object.keys(state.todoList).filter((value) => {
+            return state.todoList[value].isDone;
+        }).length;
+    },
+    getActiveCount(state: any) {
+        return Object.keys(state.todoList).filter((value) => {
+            return !state.todoList[value].isDone;
+        }).length;
     },
 };

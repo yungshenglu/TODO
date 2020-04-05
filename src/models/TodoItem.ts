@@ -2,16 +2,16 @@ export default class TodoItem {
     protected token: string;
     protected content: string;
     protected createDate: Date;
-    protected completedDate: object;
-    protected isCompleted: boolean;
+    protected doneDate: object;
+    protected isDone: boolean;
     protected isEdit: boolean;
 
     constructor(content: string) {
         this.token = this.generateToken();
         this.content = content;
         this.createDate = new Date();
-        this.completedDate = {};
-        this.isCompleted = false;
+        this.doneDate = {};
+        this.isDone = false;
         this.isEdit = false;
     }
 
@@ -19,16 +19,20 @@ export default class TodoItem {
         return this.token;
     }
 
+    get getIsDone(): boolean {
+        return this.isDone;
+    }
+
     public updateContent(newContent: string) {
         this.content = newContent;
     }
 
-    public toggleCompletedDate() {
-        this.completedDate = (this.isCompleted) ? new Date() : {};
+    public toggleDoneDate() {
+        this.doneDate = (this.isDone) ? new Date() : {};
     }
 
-    public toggleIsCompleted() {
-        this.isCompleted = !this.isCompleted;
+    public toggleIsDone() {
+        this.isDone = !this.isDone;
     }
 
     public toggleIsEdit() {
