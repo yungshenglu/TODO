@@ -114,6 +114,16 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
         * Display all completed items
         * Display all archieves items
         * Display the progress of finishing
+* **05 APR 2020** - Develop Beta version (v0.9)
+    * Features:
+        * Enable to show different status of items (i.e., all, active, done)
+        * Enable to show the progress of current finishing
+        * Enable to show the count of of items in each status
+        * Update the whole UI for opertion
+    * TODO:
+        * Release to online-production
+        * Enable for user-login mechanisms
+        * Enable to add new list for different purpose
 
 ---
 ## Contributor
