@@ -9,14 +9,14 @@
                 </a-input-search>
             </a-col>
 
-            <a-col :xs="{ span: 20, offset: 2 }" :lg="{ span: 16, offset: 4 }">
+            <a-col v-if="todoList.length > 0" :xs="{ span: 20, offset: 2 }" :lg="{ span: 16, offset: 4 }">
                 <a-list bordered>
                     <a-list-item :class="{
                             'list-group-item': true, 
-                            'list-group-item-secondary': item.isCompleted
+                            'list-group-item-secondary': item.isDone
                         }"  
-                        v-for="(item, index) of todoList" :key="index">
-                        <a-checkbox @change="toggleTodo(item)"></a-checkbox>
+                        v-for="(item, index) of filterTodo(filterType)" :key="index">
+                        <a-checkbox :checked="item.isDone" @change="toggleTodo(item)"></a-checkbox>
                         <label style="text-align:left; width: 87%;" v-if="!item.isEdit" @click="toggleEdit(item)">
                             {{ item.content }}
                         </label>
@@ -25,21 +25,21 @@
                             @keyup.enter="updateTodo(item, $event.target.value)"
                             :value="item.content">
                         </a-input>
-                        <a-icon type="close" @click.stop="removeTodo(item)" />
+                        <a-icon type="close" style="color: red" @click.stop="removeTodo(item)" />
                     </a-list-item>
                     <div slot="header">
                         <a-row>
-                            <a-col style="text-align: left;" :xs="{ span: 4 }" :lg="{ span: 4 }">
+                            <a-col style="text-align: left;" :xs="{ span: 5 }" :lg="{ span: 5 }">
                                 <span style="font-size: 18px;">
                                     {{ currRemaining() }}
                                 </span>
                             </a-col>
-                            <a-col style="text-align: right;" :xs="{ span: 8, offset: 12 }" :lg="{ span: 8, offset: 12 }">
-                                <a-button-group v-model="filterTodo">
-                                    <a-button value="ALL">ALL</a-button>
-                                    <a-button value="ACTIVE">ACTIVE</a-button>
-                                    <a-button value="DONE">DONE</a-button>
-                                </a-button-group>
+                            <a-col style="text-align: right;" :xs="{ span: 7, offset: 12 }" :lg="{ span: 7, offset: 12 }">
+                                <a-radio-group default-value="ALL" v-model="filterType">
+                                    <a-radio-button value="ALL">ALL</a-radio-button>
+                                    <a-radio-button value="ACTIVE">ACTIVE</a-radio-button>
+                                    <a-radio-button value="DONE">DONE</a-radio-button>
+                                </a-radio-group>
                             </a-col>
                         </a-row>
                     </div>
@@ -65,8 +65,8 @@ export default class TodoList extends Vue {
     constructor() {
         super();
         this.newTodo = '';
-        this.todoList = this.$store.getters.getTodoList;
-        this.filterType = 'ALL';
+        this.todoList = this.$store.state.todoList;
+        this.filterType = this.$store.getters.getFilterType;
     }
 
     public addTodo(newTodo: string) {
@@ -87,15 +87,25 @@ export default class TodoList extends Vue {
     }
 
     public currRemaining(): string {
-        return `${
-            this.$store.state.todoList.filter((item: TodoItem) => !item.getIsDone).length
-        } items left`;
+        if (this.filterType !== 'ALL') {
+            let remain = this.$store.state.todoList.filter((item: TodoItem) => (this.filterType === 'ACTIVE') ? !item.getIsDone : item.getIsDone).length;
+            let remainStatus = (this.filterType === 'ACTIVE') ? 'active' : 'done';
+            if (remain > 1) {
+                return `${remain} items are ` + remainStatus;
+            } else {
+                return `${remain} item is ` + remainStatus;
+            }
+        } else {
+            let activeItem = this.$store.state.todoList.filter((item: TodoItem) => item.getIsDone).length;
+            let totalItem = this.$store.state.todoList.length;
+            return `${activeItem}/${totalItem}`
+        }
     }
 
     public filterTodo(filterType: string) {
         this.filterType = filterType;
         this.$store.dispatch('filterTodo', this.filterType);
-        this.todoList = this.$store.getters.getTodoList;
+        return this.$store.getters.getTodoList;
     }
 
     public toggleEdit(item: TodoItem) {

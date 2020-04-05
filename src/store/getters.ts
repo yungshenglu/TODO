@@ -10,13 +10,13 @@ export const getters = {
             }
             return currTodoList;
         }
-        switch (state.filter) {
+        switch (state.filterType) {
             case 'ALL':
                 return state.todoList;
-            case 'DONE':
-                return getCurrTodoList(true);
             case 'ACTIVE':
                 return getCurrTodoList(false);
+            case 'DONE':
+                return getCurrTodoList(true);
         }
     },
     getFilterType(state: any) {
