@@ -120,8 +120,8 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
         * Enable to show the progress of current finishing
         * Enable to show the count of of items in each status
         * Update the whole UI for opertion
-    * TODO:
         * Release to online-production
+    * TODO:
         * Enable for user-login mechanisms
         * Enable to add new list for different purpose
 
