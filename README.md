@@ -1,6 +1,8 @@
-# Vue Simple TodoList
+# Vue TODO!
 
-This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For now, we have a Beta version (v0.1) which enable user to add, remove, and check your items in the TODO-list.
+This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For now, we have a Beta version (v0.1) which enable user to add, remove, edit, and check your items in the TODO-list. Besides, we also provides very simple classification for the status of each item (i.e, todo, done)
+
+![](src/assets/TODO!-demo.png)
 
 > **HINT:** If you have any questions, please feel free to ask me.
 

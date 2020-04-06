@@ -1,6 +1,6 @@
 <template>
     <div class="todolist">
-        <h2 id="todo-title">TODOS</h2>
+        <h2 id="todo-title">TODO!</h2>
         <a-row>
             <a-col :sm="{ span: 24, offset: 0 }" :md="{ span: 14, offset: 5 }">
                 <a-card :bordered="false">
