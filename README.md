@@ -47,7 +47,7 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
     > **NOTES:** See [Configuration Reference](https://cli.vuejs.org/config/).
 4. Change directory to your project and show all files
     ```bash
-    $ cd vue-todolist/ & ls
+    $ cd Vue-TodoList/ & ls
     README.md         package-lock.json public            tsconfig.json
     node_modules      package.json      src               tslint.json
     ```
