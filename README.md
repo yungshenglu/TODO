@@ -7,28 +7,6 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
 > **HINT:** If you have any questions, please feel free to ask me.
 
 ---
-## Execution
-
-1. Project setup
-    ```bash
-    $ npm install
-    ```
-2. Compiles and hot-reloads for development
-    ```bash
-    $ npm run serve
-    ```
-3. Compiles and minifies for production
-    ```bash
-    $ npm run build
-    ```
-4. Lints and fixes files
-    ```bash
-    $ npm run lint
-    ```
-
-> **NOTES:** See [Configuration Reference](https://cli.vuejs.org/config/).
-
----
 ## Descriptions
 
 ### Implementation
@@ -66,6 +44,7 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
         $ npm run serve
 
         ```
+    > **NOTES:** See [Configuration Reference](https://cli.vuejs.org/config/).
 4. Change directory to your project and show all files
     ```bash
     $ cd vue-todolist/ & ls
@@ -79,9 +58,51 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
     ```
     * If compiled succeed, you can open your browser to `http://localhost:8080`
 
-### Development 
+### Execution
 
-(To be updated.)
+1. To run our production, you need to clone our project first
+    ```bash
+    $ git clone https://github.com/yungshenglu/Vue-TodoList/
+    ```
+2. After cloning, change the your current directory into the repository and setup the project
+    ```bash
+    $ cd Vue-TodoList/ & npm install
+    ```
+    * The command `npm install` will install some necessary packages for this project
+    * It will take few second for running above command
+3. Compiles and hot-reloads for development
+    ```bash
+    $ npm run serve
+    ```
+    * It will take few second for running above command
+    * You won't get any error messages if running successful
+4. Congratulation! you can open your browser to `http://localhost:8080` and see our TODO-list
+
+### Deploy on GitHub Pages
+
+1. To deploy our production, make sure your current directory is the root of this repository and run the following command
+    ```bash
+    $ npm run build
+    ```
+    * It will take few second for ruuning above command
+    * You will get a new folder `dist/` after building successful
+    * You don't need to push `dist/` on your GitHub because `dist/` has already been ignored by git via `.gitignore`
+2. Before deploying, make sure you have already created your repository on GitHub
+3. Change the directory into `dist/` and create a new branch for deploying on your GitHub Pages
+    ```bash
+    $ cd dist/
+    # You need to initialize git due to dist/ is ignored as default
+    $ git init
+    $ git add -A
+    $ git commit -m "Deploy on GitHub Pages"
+    # Deploy to your GitHub repository on branch "gh-pages"
+    $ git push -f https://github.com/yungshenglu/Vue-TodoList.git master:gh-pages
+    $ cd -
+    ```
+4. After deploying, you can find it on your GitHub with branch `gh-pages`
+5. Open setting page of your repository and move to the section `GitHub Pages`
+6. Select `Source` of your GitHub Pages to `gh-pages branch`
+7. Congratulation! you can open your browser to the link of your GitHub Pages
 
 ---
 ## Logs
