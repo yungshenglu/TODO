@@ -105,50 +105,6 @@ This reposiotory is my practice to implement a simple TODO-list in Vue/Vuex. For
 7. Congratulation! you can open your browser to the link of your GitHub Pages
 
 ---
-## Logs
-
-* **03 APR 2020** - Develope Beta version (v0.1)
-    * Features:
-        * User can add, remove, and check each item into list.
-        * Item can be distinguished whether it is completed or not.
-        * This version without using Vuex.
-    * TODO:
-        * Display the completeed date on each item
-        * Use Veux for managing for all events
-* **03 APR 2020** - Develope Beta version (v0.2)
-    * Features:
-        * Use Veux for managing the state of all events
-        * Add [token (UUID)](https://gist.github.com/tschuegge/903b4688a70c2ea34a6270fcc7baac48) for each item
-        * Make TodoItem as a independent model
-    * TODO:
-        * Enable to modify the content of existed item
-        * Include Semantic UI to update the interface
-        * Display the completed date om each item
-        * Display all completed items
-        * Display all archieves items
-        * Display a modal for completing all items
-* **04 APR 2020** - Develop Beta version (v0.3)
-    * Features:
-        * Make state-management more structured (i.e., actions, mutations, getters, types)
-        * Use Ant-design as new UI library
-        * Enable to modify the content of existed item
-    * TODO:
-        * Display the completed date om each item
-        * Display all completed items
-        * Display all archieves items
-        * Display the progress of finishing
-* **05 APR 2020** - Release Beta version (v1.0)
-    * Features:
-        * Enable to show different status of items (i.e., all, active, done)
-        * Enable to show the progress of current finishing
-        * Enable to show the count of of items in each status
-        * Update the whole UI for opertion
-        * Release to online-production
-    * TODO:
-        * Enable for user-login mechanisms
-        * Enable to add new list for different purpose
-
----
 ## Contributor
 
 > **NOTICE:** You can follow the contributing process [CONTRIBUTING.md](CONTRIBUTING.md) to join me. I am very welcome any issue!
