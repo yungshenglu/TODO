@@ -107,7 +107,7 @@ This repository is my practice to implement a simple TODO-list in Vue/Vuex. For 
 ---
 ## Contributor
 
-> **NOTICE:** You can follow the contributing process [CONTRIBUTING.md](CONTRIBUTING.md) to join me. I am very welcome any issue!
+> **NOTICE:** You can follow the contributing process [CONTRIBUTING.md](CONTRIBUTING.md) to join me. I am very welcome for any issue!
 
 * [David Lu](https://github.com/yungshenglu)
 
