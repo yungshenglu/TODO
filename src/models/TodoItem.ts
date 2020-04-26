@@ -1,9 +1,9 @@
 export default class TodoItem {
-    protected token: string;
+    public token: string;
+    public isDone: boolean;
     protected content: string;
     protected createDate: Date;
     protected doneDate: object;
-    protected isDone: boolean;
     protected isEdit: boolean;
 
     constructor(content: string) {
@@ -13,14 +13,6 @@ export default class TodoItem {
         this.doneDate = {};
         this.isDone = false;
         this.isEdit = false;
-    }
-
-    get getToken(): string {
-        return this.token;
-    }
-
-    get getIsDone(): boolean {
-        return this.isDone;
     }
 
     /* tslint:disable:no-bitwise */

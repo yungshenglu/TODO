@@ -8,7 +8,7 @@
                         v-model="newTodo" 
                         @keyup.enter="addTodo(newTodo)" 
                         @search="addTodo(newTodo)">
-                        <a-button icon="plus" type="primary"  slot="enterButton" 
+                        <a-button icon="plus" type="primary" slot="enterButton" 
                             @search="addTodo(newTodo)"></a-button>
                     </a-input-search>
                 </a-card>
@@ -33,7 +33,8 @@
                             <a-input class="todo-item-edit" type="text" allowClear 
                                 v-if="item.isEdit" 
                                 v-model="item.content"
-                                @keyup.enter="updateTodo(item, $event.target.value)" :value="item.content">
+                                @keyup.enter="updateTodo(item, $event.target.value)"
+                                :value="item.content">
                             </a-input>
                             <a-icon class="todo-item-close" type="close" 
                                 @click.stop="removeTodo(item)" />
@@ -41,8 +42,7 @@
                         <div slot="header">
                             <a-row class="todo-header">
                                 <a-col id="todo-header-progress" :xs="{ span: 10 }" :lg="{ span: 12 }">
-                                    <a-progress type="circle" :width="30" :percent="donePercentage"  :showInfo="true" :format="() => ``"
-                                        v-if="filterType === 'ALL'"  />
+                                    <a-progress type="circle" :width="24" :percent="donePercentage"  :showInfo="true" :format="() => ``" v-if="filterType === 'ALL'" />
                                     <span id="todo-header-remain">
                                         {{ currRemaining() }}
                                     </span>
@@ -51,7 +51,7 @@
                                     <a-radio-group buttonStyle="solid" size="small" default-value="ALL" 
                                         v-model="filterType">
                                         <a-radio-button value="ALL">ALL</a-radio-button>
-                                        <a-radio-button value="ACTIVE">TODO</a-radio-button>
+                                        <a-radio-button value="TODO">TODO</a-radio-button>
                                         <a-radio-button value="DONE">DONE</a-radio-button>
                                     </a-radio-group>
                                 </a-col>
@@ -97,7 +97,7 @@ export default class TodoList extends Vue {
 
     public updateTodo(item: TodoItem, newContent: string) {
         this.$store.dispatch('updateTodo', {
-            token: item.getToken,
+            token: item.token,
             content: newContent,
         });
         this.toggleEdit(item);
@@ -107,11 +107,11 @@ export default class TodoList extends Vue {
         if (this.filterType !== 'ALL') {
             let remain: number = 0;
             let remainStatus: string = '';
-            if (this.filterType === 'ACTIVE') {
-                remain = this.$store.state.todoList.filter((item: TodoItem) => !item.getIsDone).length;
-                remainStatus = 'active';
+            if (this.filterType === 'TODO') {
+                remain = this.$store.state.todoList.filter((item: TodoItem) => !item.isDone).length;
+                remainStatus = 'todo';
             } else {
-                remain = this.$store.state.todoList.filter((item: TodoItem) => item.getIsDone).length;
+                remain = this.$store.state.todoList.filter((item: TodoItem) => item.isDone).length;
                 remainStatus = 'done';
             }
 
@@ -121,7 +121,7 @@ export default class TodoList extends Vue {
                 return `${remain} item is ` + remainStatus;
             }
         } else {
-            const activeItem = this.$store.state.todoList.filter((item: TodoItem) => item.getIsDone).length;
+            const activeItem = this.$store.state.todoList.filter((item: TodoItem) => item.isDone).length;
             const totalItem = this.$store.state.todoList.length;
             this.donePercentage = (activeItem / totalItem) * 100;
             return `${activeItem}/${totalItem}`;
@@ -135,11 +135,11 @@ export default class TodoList extends Vue {
     }
 
     public toggleEdit(item: TodoItem) {
-        this.$store.dispatch('toggleEdit', item.getToken);
+        this.$store.dispatch('toggleEdit', item.token);
     }
 
     public toggleTodo(item: TodoItem) {
-        this.$store.dispatch('toggleTodo', item.getToken);
+        this.$store.dispatch('toggleTodo', item.token);
     }
 }
 </script>
@@ -200,5 +200,30 @@ export default class TodoList extends Vue {
 
 .ant-card-body {
     padding: 12px !important;
+}
+
+.ant-radio-button-wrapper {
+    &.ant-radio-button-wrapper-checked {
+        &:not(.ant-radio-button-wrapper-disabled) {
+            background: $primary-color !important;
+            border-color: $primary-color !important;
+            box-shadow: -1px 0 0 0 $primary-color !important;
+            &::before {
+                background-color: $primary-color !important;
+            }
+            &::selection {
+                background: $primary-color !important;
+            }
+        }
+    }
+    &:not(.ant-radio-button-wrapper-checked):hover {
+        color: $primary-color !important;
+    }
+
+}
+
+.ant-btn-primary {
+    background: $primary-color !important;
+    border-color: $primary-color !important;
 }
 </style>

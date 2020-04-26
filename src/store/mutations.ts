@@ -12,7 +12,7 @@ export const mutations = {
     },
     [types.UPDATETODO](state: any, payload: any) {
         const targetItem = state.todoList.filter((target: TodoItem) => {
-            return (target.getToken === payload.token);
+            return (target.token === payload.token);
         })[0];
         targetItem.content = payload.content;
     },
@@ -21,7 +21,7 @@ export const mutations = {
     },
     [types.TOGGLETODO](state: any, itemToken: string) {
         const targetItem = state.todoList.filter((target: TodoItem) => {
-            return (target.getToken === itemToken);
+            return (target.token === itemToken);
         })[0];
         targetItem.isDone = !targetItem.isDone;
         targetItem.isEdit = (targetItem.isEdit) ? !targetItem.isEdit : targetItem.isEdit;
@@ -29,7 +29,7 @@ export const mutations = {
     },
     [types.TOGGLEEDIT](state: any, itemToken: string) {
         const targetItem = state.todoList.filter((target: TodoItem) => {
-            return (target.getToken === itemToken);
+            return (target.token === itemToken);
         })[0];
         targetItem.isEdit = !targetItem.isEdit;
     },
