@@ -23,22 +23,6 @@ export default class TodoItem {
         return this.isDone;
     }
 
-    public updateContent(newContent: string) {
-        this.content = newContent;
-    }
-
-    public toggleDoneDate() {
-        this.doneDate = (this.isDone) ? new Date() : {};
-    }
-
-    public toggleIsDone() {
-        this.isDone = !this.isDone;
-    }
-
-    public toggleIsEdit() {
-        this.isEdit = !this.isEdit;
-    }
-
     /* tslint:disable:no-bitwise */
     private generateToken(): string {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (char) => {

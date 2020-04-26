@@ -14,7 +14,7 @@ export const mutations = {
         const targetItem = state.todoList.filter((target: TodoItem) => {
             return (target.getToken === payload.token);
         })[0];
-        targetItem.updateContent(payload.content);
+        targetItem.content = payload.content;
     },
     [types.FILTERTODO](state: any, filterType: string) {
         state.filterType = filterType;
@@ -23,13 +23,14 @@ export const mutations = {
         const targetItem = state.todoList.filter((target: TodoItem) => {
             return (target.getToken === itemToken);
         })[0];
-        targetItem.toggleIsDone();
-        targetItem.toggleDoneDate();
+        targetItem.isDone = !targetItem.isDone;
+        targetItem.isEdit = (targetItem.isEdit) ? !targetItem.isEdit : targetItem.isEdit;
+        targetItem.doneDate = (targetItem.isDone) ? new Date() : {};
     },
     [types.TOGGLEEDIT](state: any, itemToken: string) {
         const targetItem = state.todoList.filter((target: TodoItem) => {
             return (target.getToken === itemToken);
         })[0];
-        targetItem.toggleIsEdit();
+        targetItem.isEdit = !targetItem.isEdit;
     },
 };
