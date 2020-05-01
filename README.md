@@ -105,7 +105,7 @@ Besides, I also developed [desktop version](https://github.com/yungshenglu/TODO-
    $ git add -A
    $ git commit -m "Deploy on GitHub Pages"
    # Deploy to your GitHub repository on branch "gh-pages"
-   $ git push -f https://github.com/yungshenglu/Vue-TodoList.git master:gh-pages
+   $ git push -f https://github.com/yungshenglu/TODO.git master:gh-pages
    $ cd -
    ```
 4. After deploying, you can find it on your GitHub with branch `gh-pages`
