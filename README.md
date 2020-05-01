@@ -1,6 +1,6 @@
-# Vue TODO!
+# TODO!
 
-This repository is my practice to implement a simple TODO-list in Vue/Vuex. For now, we have a Beta version (v1.0) that enables users to add, remove, edit, and check your items in the TODO-list. Besides, we also provide a very simple classification for the status of each item (i.e, todo, done)
+This repository is my practice to implement a simple TODO-list in Vue/Vuex with TypeScript. For now, we have a beta version (v1.0) that enables users to add, remove, edit, and check your items in the TODO-list. Besides, we also provide a very simple classification for the status of each item (i.e, todo, done)
 
 ![](src/assets/TODO!-demo.png)
 
@@ -59,7 +59,8 @@ This repository is my practice to implement a simple TODO-list in Vue/Vuex. For 
 
     - This will take a while for initializing the project
     - You will get the following message if initialized succeed.
-      ```bash
+
+      ````bash
       🎉 Successfully created project todolist.
       👉 Get started with the following commands:
 
@@ -69,6 +70,7 @@ This repository is my practice to implement a simple TODO-list in Vue/Vuex. For 
           ```
 
       > **NOTES:** See [Configuration Reference](https://cli.vuejs.org/config/).
+      ````
 
 4.  Change directory to your project and show all files
     ```bash
