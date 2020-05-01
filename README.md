@@ -1,10 +1,10 @@
 # TODO!
 
+![](src/assets/TODO!-demo.png)
+
 This repository is my practice to implement a simple TODO-list in Vue/Vuex with TypeScript. For now, we have a beta version (v1.0) that enables users to add, remove, edit, and check your items in the TODO-list. Besides, we also provide a very simple classification for the status of each item (i.e, todo, done)
 
-Besides, I also developed desktop version for TODO! using Electron. Please refer to my another [repository](electron-installer-debian).
-
-![](src/assets/TODO!-demo.png)
+Besides, I also developed [desktop version](https://github.com/yungshenglu/TODO-desktop) for TODO! using Electron. :tada:
 
 > **HINT:** If you have any questions, please feel free to ask me.
 
