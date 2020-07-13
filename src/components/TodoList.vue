@@ -20,29 +20,6 @@
       <a-col :sm="{ span: 24, offset: 0 }" :md="{ span: 14, offset: 5 }" v-if="todoList.length > 0">
         <a-card :bordered="false">
           <a-list bordered>
-            <a-list-item
-              :class="{
-                'todo-item': true,
-                'todo-item-done': item.isDone
-              }"
-              v-for="(item, index) of filterTodo(filterType)"
-              :key="index"
-            >
-              <a-checkbox :checked="item.isDone" @change="toggleTodo(item)"></a-checkbox>
-              <label class="todo-item-content" v-if="!item.isEdit" @click="toggleEdit(item)">
-                {{ item.content }}
-              </label>
-              <a-input
-                class="todo-item-edit"
-                type="text"
-                allowClear
-                v-if="item.isEdit"
-                v-model="item.content"
-                @keyup.enter="updateTodo(item, $event.target.value)"
-                :value="item.content"
-              ></a-input>
-              <a-icon class="todo-item-close" type="close" @click.stop="removeTodo(item)" />
-            </a-list-item>
             <div slot="header">
               <a-row class="todo-header">
                 <a-col id="todo-header-progress" :xs="{ span: 10 }" :lg="{ span: 12 }">
@@ -67,6 +44,29 @@
                 </a-col>
               </a-row>
             </div>
+            <a-list-item
+              :class="{
+                'todo-item': true,
+                'todo-item-done': item.isDone
+              }"
+              v-for="(item, index) of filterTodo(filterType)"
+              :key="index"
+            >
+              <a-checkbox :checked="item.isDone" @change="toggleTodo(item)"></a-checkbox>
+              <label class="todo-item-content" v-if="!item.isEdit" @click="toggleEdit(item)">
+                {{ item.content }}
+              </label>
+              <a-input
+                class="todo-item-edit"
+                type="text"
+                allowClear
+                v-if="item.isEdit"
+                v-model="item.content"
+                @keyup.enter="updateTodo(item, $event.target.value)"
+                :value="item.content"
+              ></a-input>
+              <a-icon class="todo-item-close" type="close" @click.stop="removeTodo(item)" />
+            </a-list-item>
           </a-list>
         </a-card>
       </a-col>
