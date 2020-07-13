@@ -5,15 +5,15 @@
 @import '_variable';
 
 @mixin card-transition {
-    transition: box-shadow $card-transition;
-    transition: -webkit-box-shadow $card-transition;
-    transition: -moz-box-shadow $card-transition;
-    transition: -o-box-shadow $card-transition;
+  transition: box-shadow $card-transition;
+  transition: -webkit-box-shadow $card-transition;
+  transition: -moz-box-shadow $card-transition;
+  transition: -o-box-shadow $card-transition;
 }
 
 @mixin card-box-shadow {
-    box-shadow: $card-shadow;
-    -webkit-box-shadow: $card-shadow;
-    -moz-box-shadow: $card-shadow;
-    -o-box-shadow: $card-shadow;
+  box-shadow: $card-shadow;
+  -webkit-box-shadow: $card-shadow;
+  -moz-box-shadow: $card-shadow;
+  -o-box-shadow: $card-shadow;
 }
