@@ -20,13 +20,13 @@ Besides, I also developed [desktop version](https://github.com/yungshenglu/TODO-
    ```
 2. After cloning, change the your current directory into the repository and setup the project
    ```bash
-   $ cd Vue-TodoList/ & npm install
+   $ cd Vue-TodoList/ & yarn install
    ```
-   - The command `npm install` will install some necessary packages for this project
+   - The command `yarn install` will install some necessary packages for this project
    - It will take few second for running above command
 3. Compiles and hot-reloads for development
    ```bash
-   $ npm run serve
+   $ yarn serve
    ```
    - It will take few second for running above command
    - You won't get any error messages if running successful
@@ -39,7 +39,7 @@ Besides, I also developed [desktop version](https://github.com/yungshenglu/TODO-
 1.  Make sure you have already install Node.js
 2.  Install Vue-CLI for initializing the project
     ```bash
-    $ npm install -g "@vue/cli"
+    $ yarn global add "@vue/cli"
     ```
 3.  Create a Vue project via Vue-CLI
 
@@ -67,7 +67,7 @@ Besides, I also developed [desktop version](https://github.com/yungshenglu/TODO-
       👉 Get started with the following commands:
 
           $ cd todolist
-          $ npm run serve
+          $ yarn serve
 
           ```
 
@@ -82,7 +82,7 @@ Besides, I also developed [desktop version](https://github.com/yungshenglu/TODO-
     ```
 5.  How to run the project on local machine?
     ```bash
-    $ npm run serve
+    $ yarn serve
     # You will NOT get any error meesage if compiled succeed
     ```
     - If compiled succeed, you can open your browser to `http://localhost:8080`
@@ -91,7 +91,7 @@ Besides, I also developed [desktop version](https://github.com/yungshenglu/TODO-
 
 1. To deploy our production, make sure your current directory is the root of this repository and run the following command
    ```bash
-   $ npm run build
+   $ yarn build
    ```
    - It will take few second for ruuning above command
    - You will get a new folder `dist/` after building successful
