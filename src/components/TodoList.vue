@@ -226,4 +226,15 @@ export default class TodoList extends Vue {
     background: $primary-color !important;
     border-color: $primary-color !important;
 }
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+}
+
+
+.ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner {
+    border-color: $primary-color !important;
+}
+
 </style>
